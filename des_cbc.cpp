@@ -98,7 +98,6 @@ int main(int argc, char* argv[])
 	byte key[DES::DEFAULT_KEYLENGTH] = { 0x14, 0x0b, 0xb2, 0x2a, 0xb4, 0x06, 0xb6, 0x74 };
 	byte iv[DES::BLOCKSIZE] = { 0x4c, 0xa0, 0x0f, 0xd6, 0xdb, 0xf1, 0xfb, 0x28 };
 	//string plain = "abcdefghijklmno";
-	string ciphertext = "";
 	//string plaintext = "";
 	
 	// file io variables
@@ -117,11 +116,11 @@ int main(int argc, char* argv[])
 	// read the file
 	stringstream buffer;
 	buffer << file1.rdbuf();
-	string plain(buffer.str());
 
 	if (flag == "0") {
 		// START OF ENCRYPTION
-
+		string plain(buffer.str());
+		string ciphertext = "";
 		// Pad the plaintext and output for testing
 		int paddedsize = 8;
 		if (plain.length() % 8 != 0) {
@@ -179,11 +178,12 @@ int main(int argc, char* argv[])
 	else if (flag == "1") {
 		// START OF DECRYPTION
 		string plain = "";
-		string ciphertext = "";
+		string ciphertext(buffer.str());
 	
 		//reset xorblock to iv
 		for (int i = 0; i < 8; i++) {
 			xorBlock[i] = (unsigned char)iv[i];
+			keyC[i] = (unsigned char) key[i];
 		}
 
 		//output that encryption is beginning
