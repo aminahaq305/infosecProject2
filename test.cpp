@@ -43,7 +43,6 @@ int main()
 	byte key[DES::DEFAULT_KEYLENGTH] = { 0x14, 0x0b, 0xb2, 0x2a, 0xb4, 0x06, 0xb6, 0x74 };
 	byte iv[DES::BLOCKSIZE] = { 0x4c, 0xa0, 0x0f, 0xd6, 0xdb, 0xf1, 0xfb, 0x28 };
 	string plain = "0x00112233445566778899AABBCCDDEEFF";
-	string prefix = plain.substr(0, 2);
 	string ciphertext = "";
 	string plaintext = "";
 
