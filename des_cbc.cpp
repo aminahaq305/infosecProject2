@@ -109,9 +109,6 @@ int main(int argc, char* argv[])
 			plain = plain.erase(0, 8);
 		} while (plain.length() != 0);
 
-		//output the ciphertext produced
-		cout << "ciphertext: " << ciphertext << endl;
-
 		//write ciphertext to file specified
 		file2 << ciphertext;
 		cout << "ciphertext stored in: " << argv[2] << endl;
@@ -158,7 +155,6 @@ int main(int argc, char* argv[])
 		//Depad the plaintext retrieved
 		int depadding = (int)plain.at(plain.length() - 1);
 		plain = plain.substr(0, plain.length() - depadding);
-		cout << "Plaintext retrieved: " << plain << endl;
 
 		//write plaintext to file specified
 		file2 << plain;
