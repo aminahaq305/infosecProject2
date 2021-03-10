@@ -118,16 +118,19 @@ int main()
 	byte iv[DES::BLOCKSIZE] = { 0x4c, 0xa0, 0x0f, 0xd6, 0xdb, 0xf1, 0xfb, 0x28 };
 
 	string cipher = "";
-	string plain = "abcdef";
+	string plain = "abcdefgh";
 	// Pad the plaintext
-	int paddedsize = 1;
+	int paddedsize = 8;
 	if (plain.length() % 8 != 0) {
-		paddedsize = 8 - (plain.length() % 8);
+		int mod = 8 - (plain.length() % 8);
+		if (mod != 0) {
+			paddedsize = mod;
+		}
 	}
 	for (int i = 0; i < paddedsize; i++) {
 		plain = plain + (char)paddedsize;
 	}
-	cout << "Plaintext provided: " << plain << endl;
+	cout << "Plaintext after padding: " << plain << endl;
 	//Convert key to char, set xorBlock to iv, and setup the first input
 	for (int i = 0; i < 8; i++) {
 		keyC[i] = (unsigned char)key[i];
