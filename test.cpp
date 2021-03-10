@@ -118,7 +118,7 @@ int main()
 	byte iv[DES::BLOCKSIZE] = { 0x4c, 0xa0, 0x0f, 0xd6, 0xdb, 0xf1, 0xfb, 0x28 };
 
 	string cipher = "";
-	string plain = "abcdefgh";
+	string plain = "";
 	// Pad the plaintext
 	int paddedsize = 8;
 	if (plain.length() % 8 != 0) {
@@ -154,6 +154,8 @@ int main()
 		cipher = cipher + (char)output[i];
 	}
 	cout << "\n" << endl;
+	int depadding = (int)cipher.at(cipher.length() - 1);
+	cipher = cipher.substr(0, cipher.length() - depadding);
 	cout << "DECRYPTING!" << endl;
 	cout << "Plaintext retrieved: " << cipher << endl;
 }
