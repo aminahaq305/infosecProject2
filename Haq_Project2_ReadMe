@@ -1,7 +1,7 @@
-The des_cbc.cpp file can be used on bender.cs.wright.edu to encrypt or decrypt files.
+The Haq_Project2.cpp file can be used on bender.cs.wright.edu to encrypt or decrypt files.
 
 First compile the des_cbc.cpp file using the following command:
-  cryptog++ des_cbc.cpp -lcryptopp -o descbc
+  cryptog++ Haq_Project2.cpp -lcryptopp -o descbc
 
 Use the compiled file to encrypt/decrypt using the following command
   cryptoexec ./descbc <inputfile> <outputfile> <flag>
