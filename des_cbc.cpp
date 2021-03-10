@@ -126,7 +126,6 @@ int main(int argc, char* argv[])
 		}
 
 		//output that encryption is beginning and key and iv
-		cout << "\n" << endl;
 		cout << "DECRYPTING!" << endl;
 		cout << "Key: ";
 		for (int i = 0; i < 8; i++) {
