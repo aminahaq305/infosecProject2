@@ -9,3 +9,9 @@ where:
    <inputfile> represents the file containing the plaintext/ciphertext to be encrypted/decrypted
    <outputfile> represents the file to which the plaintext/ciphertext produced will be written (depending on encryption or decryption)
    <flag> is an integer value which represents whether to encrypt or decrypt the content of the inputfile. Use 0 for encrypt, and 1 for decrypt.
+   
+Example code to encrypt file myfile and write ciphertext produced to myfile.e
+  cryptoexec ./descbc myfile myfile.e 0
+  
+Example code to decrypt file myfile.e and write plaintext produced to myfile.d
+  cryptoexec ./descbc myfile.e myfile.d 1
