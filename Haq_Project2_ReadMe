@@ -1,3 +1,5 @@
+CEG4750-01; Information Security; Amina Haq, David Wilson, Pauline Arcita; Prof. Meilin Liu; 03/18/2021; Project 2
+
 The Haq_Project2.cpp file can be used on bender.cs.wright.edu to encrypt or decrypt files.
 
 First compile the des_cbc.cpp file using the following command:
