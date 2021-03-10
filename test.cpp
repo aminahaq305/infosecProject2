@@ -13,79 +13,24 @@ using namespace std;
 
 using namespace CryptoPP;
 
-void des_encryption_8(unsigned char* input, unsigned char* key,
-	unsigned char* xorBlock, unsigned char* output)
+void des_encryption_8(unsigned char* input, unsigned char* key, unsigned char* xorBlock, unsigned char* output)
 {
-
 	DESEncryption desEncryptor;
-	/*cout << "Input Inside: ";
-	for (int i = 0; i < 8; i++) {
-		cout << input[i];
-	}*/
 	desEncryptor.SetKey(key, 8);
 	for (int i = 0; i < 8; i++) {
 		input[i] = input[i] ^ xorBlock[i];
 	}
 	desEncryptor.ProcessBlock(input, output);
-	/*desEncryptor.ProcessAndXorBlock(input, xorBlock, output);
-	cout << "." << endl;
-	cout << "IV After encryption: ";
-	for (int i = 0; i < 8; i++) {
-		cout << hex << (int)xorBlock[i];
-	}
-	cout << "." << endl;
-	cout << "Key After encryption: ";
-	for (int i = 0; i < 8; i++) {
-		cout << hex << (int)key[i];
-	}
-	cout << "." << endl;
-	cout << "Input After XOR: ";
-	for (int i = 0; i < 8; i++) {
-		cout << input[i];
-	}
-	cout << "." << endl;
-	cout << "Output After encryption: ";
-	for (int i = 0; i < 8; i++) {
-		cout << output[i];
-	}
-	cout << "." << endl;*/
 }
 
-void des_decryption_8(unsigned char* input, unsigned char* key,
-	unsigned char* xorBlock, unsigned char* output)
+void des_decryption_8(unsigned char* input, unsigned char* key, unsigned char* xorBlock, unsigned char* output)
 {
 	DESDecryption desDecryptor;
-	/*
-	cout << "Input Inside: ";
-	for (int i = 0; i < 8; i++) {
-		cout << input[i];
-	}*/
 	desDecryptor.SetKey(key, 8);
 	desDecryptor.ProcessBlock(input, output);
 	for (int i = 0; i < 8; i++) {
 		output[i] = output[i] ^ xorBlock[i];
 	}
-	/*cout << "." << endl;
-	cout << "IV After encryption: ";
-	for (int i = 0; i < 8; i++) {
-		cout << hex << (int)xorBlock[i];
-	}
-	cout << "." << endl;
-	cout << "Key After encryption: ";
-	for (int i = 0; i < 8; i++) {
-		cout << hex << (int)key[i];
-	}
-	cout << "." << endl;
-	cout << "Input After encryption: ";
-	for (int i = 0; i < 8; i++) {
-		cout << input[i];
-	}
-	cout << "." << endl;
-	cout << "Output After encryption: ";
-	for (int i = 0; i < 8; i++) {
-		cout << output[i];
-	}
-	cout << "." << endl;*/
 }
 
 int main()
@@ -97,7 +42,7 @@ int main()
 	unsigned char output[DES::BLOCKSIZE];
 	byte key[DES::DEFAULT_KEYLENGTH] = { 0x14, 0x0b, 0xb2, 0x2a, 0xb4, 0x06, 0xb6, 0x74 };
 	byte iv[DES::BLOCKSIZE] = { 0x4c, 0xa0, 0x0f, 0xd6, 0xdb, 0xf1, 0xfb, 0x28 };
-	string plain = "abcdefghijklmno";
+	string plain = "0x00112233445566778899AABBCCDDEEFF";
 	string prefix = plain.substr(0, 2);
 	string ciphertext = "";
 	string plaintext = "";
@@ -126,12 +71,12 @@ int main()
 	for (int i = 0; i < 8; i++) {
 		cout << hex << (int)keyC[i];
 	}
-	cout << "." << endl;
+	cout << "\n" << endl;
 	cout << "IV: ";
 	for (int i = 0; i < 8; i++) {
 		cout << hex << (int)xorBlock[i];
 	}
-	cout << "." << endl;
+	cout << "\n" << endl;
 
 	//output that encryption is beginning
 	cout << "\n" << endl;
