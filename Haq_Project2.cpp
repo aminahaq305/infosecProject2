@@ -1,3 +1,4 @@
+//CEG4750-01; Information Security; Amina Haq, David Wilson, Pauline Arcita; Prof. Meilin Liu; 03/18/2021; Project 2
 #include<iostream>
 #include<fstream>
 #include<sstream>
