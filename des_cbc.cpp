@@ -114,7 +114,7 @@ int main(int argc, char* argv[])
 
 		//write ciphertext to file specified
 		file2 << ciphertext;
-		cout << "ciphertext stored in:" << argv[2] << endl;
+		cout << "ciphertext stored in: " << argv[2] << endl;
 	}
 	//if flag 1, decrypt
 	else if (flag == "1") {
@@ -162,7 +162,7 @@ int main(int argc, char* argv[])
 
 		//write plaintext to file specified
 		file2 << plain;
-		cout << "plaintext stored in:" << argv[2] << endl;
+		cout << "plaintext stored in: " << argv[2] << endl;
 	}
 	//flag anything else, return error
 	else {
