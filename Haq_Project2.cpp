@@ -1,19 +1,22 @@
 //CEG4750-01; Information Security; Amina Haq, David Wilson, Pauline Arcita; Prof. Meilin Liu; 03/18/2021; Project 2
+
+//cpp libraries included
 #include<iostream>
 #include<fstream>
 #include<sstream>
 #include<string>
 using namespace std;
 
+//header files for cryptopp library included
 #include"cryptopp/cryptlib.h"
 #include"cryptopp/hex.h"
 #include"cryptopp/filters.h"
 #include"cryptopp/des.h"
 #include"cryptopp/aes.h"
 #include"cryptopp/modes.h"
-
 using namespace CryptoPP;
 
+//encryption method
 void des_encryption_8(unsigned char* input, unsigned char* key, unsigned char* xorBlock, unsigned char* output)
 {
 	DESEncryption desEncryptor;
@@ -24,6 +27,7 @@ void des_encryption_8(unsigned char* input, unsigned char* key, unsigned char* x
 	desEncryptor.ProcessBlock(input, output);
 }
 
+//decryption method
 void des_decryption_8(unsigned char* input, unsigned char* key, unsigned char* xorBlock, unsigned char* output)
 {
 	DESDecryption desDecryptor;
@@ -41,18 +45,20 @@ int main(int argc, char* argv[])
 	unsigned char xorBlock[DES::BLOCKSIZE];
 	unsigned char input[DES::BLOCKSIZE];
 	unsigned char output[DES::BLOCKSIZE];
-	byte key[DES::DEFAULT_KEYLENGTH] = { 0x14, 0x0b, 0xb2, 0x2a, 0xb4, 0x06, 0xb6, 0x74 };
-	byte iv[DES::BLOCKSIZE] = { 0x4c, 0xa0, 0x0f, 0xd6, 0xdb, 0xf1, 0xfb, 0x28 };
+	byte key[DES::DEFAULT_KEYLENGTH] = { 0x14, 0x0b, 0xb2, 0x2a, 0xb4, 0x06, 0xb6, 0x74 }; //key hardcoded
+	byte iv[DES::BLOCKSIZE] = { 0x4c, 0xa0, 0x0f, 0xd6, 0xdb, 0xf1, 0xfb, 0x28 }; //iv hardcoded
 
 	// file io variables
 	fstream file1;
 	fstream file2;
 	string flag;
-
+	
+	//if incorrect number of arguments given, output usage
 	if (argc != 4) {
 		cout << "USAGE: infile outfile flag[0 for encode, 1 for decode]" << endl;
 	}
-
+	
+	//open files and set flag variable with flag provided
 	file1.open(argv[1], ios::in);
 	file2.open(argv[2], ios::out);
 	flag = argv[3];
@@ -63,10 +69,12 @@ int main(int argc, char* argv[])
 
 	//if flag 0, encrypt
 	if (flag == "0") {
+		
 		// START OF ENCRYPTION
 		string plain(buffer.str());
 		string ciphertext = "";
-		// Pad the plaintext and output for testing
+		
+		// Pad the plaintext
 		int paddedsize = 8;
 		if (plain.length() % 8 != 0) {
 			int mod = 8 - (plain.length() % 8);
@@ -84,7 +92,7 @@ int main(int argc, char* argv[])
 			xorBlock[i] = (unsigned char)iv[i];
 		}
 
-		//output that encryption is beginning and key and iv
+		//output encryption is beginning and key and iv
 		cout << "ENCRYPTING!" << endl;
 		cout << "Key: ";
 		for (int i = 0; i < 8; i++) {
@@ -114,8 +122,10 @@ int main(int argc, char* argv[])
 		file2 << ciphertext;
 		cout << "ciphertext stored in: " << argv[2] << endl;
 	}
+	
 	//if flag 1, decrypt
 	else if (flag == "1") {
+		
 		// START OF DECRYPTION
 		string plain = "";
 		string ciphertext(buffer.str());
@@ -126,7 +136,7 @@ int main(int argc, char* argv[])
 			keyC[i] = (unsigned char)key[i];
 		}
 
-		//output that encryption is beginning and key and iv
+		//output encryption is beginning and key and iv
 		cout << "DECRYPTING!" << endl;
 		cout << "Key: ";
 		for (int i = 0; i < 8; i++) {
