@@ -18,21 +18,6 @@ using namespace std;
 
 using namespace CryptoPP;
 
-//AES ENCODE GIVEN
-string aes_encode(string& plain, byte key[])
-{
-	string cipher;
-	try {
-		ECB_Mode<AES>::Encryption enc;
-		enc.SetKey(key, AES::DEFAULT_KEYLENGTH);
-		StringSource s(plain, true, new StreamTransformationFilter(enc, new StringSink(cipher)));
-	}
-	catch (const CryptoPP::Exception& e)
-	{
-	}
-	return cipher;
-}
-
 //AES DECODE GIVEN
 string aes_decode(string& cipher, byte key[])
 {
@@ -71,7 +56,6 @@ bool percentageCalc(string plain) {
 	}
 	return false;
 }
-
 
 int main(int argc, char* argv[])
 {
@@ -132,6 +116,7 @@ int main(int argc, char* argv[])
 			}
 		}
 	}
+	
 	auto finish = chrono::steady_clock::now(); //end system clock
 	//calculate elapsed time in nanoseconds
 	double elapsedtime = double (chrono::duration_cast <chrono::nanoseconds> (finish - start).count());
