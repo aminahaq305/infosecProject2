@@ -5,6 +5,7 @@
 #include<fstream>
 #include<sstream>
 #include<string>
+#include<chrono>
 using namespace std;
 
 //header files for cryptopp library included
@@ -104,6 +105,7 @@ int main(int argc, char* argv[])
 	file1.close();
 
 	//------START OF BRUTEFORCE----------
+	auto start = chrono::steady_clock::now(); //start system clock
 	for (int i = 0; i < 36 && !end; i++) { //this for loop works using the combinations string, so 0000.....zzzz
 		for (int j = 0; j < 36 && !end; j++) {
 			for (int k = 0; k < 36 && !end; k++) {
@@ -130,9 +132,17 @@ int main(int argc, char* argv[])
 			}
 		}
 	}
+	auto finish = chrono::steady_clock::now(); //end system clock
+	//calculate elapsed time in nanoseconds
+	double elapsedtime = double (chrono::duration_cast <chrono::nanoseconds> (finish - start).count());
+
 	//write the recovered text to the file
 	file2 << recoveredtext;
 	cout << "Plaintext also stored in: " << argv[2] << endl;
 	file2.close();
+
+	//output time taken for brute force search in seconds
+	cout << "Time taken for brute force: " << elapsedtime / 1e9 << " seconds" << endl;
+
 	return 0;
 }
