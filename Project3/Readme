@@ -1,1 +1,15 @@
+CEG4750-01; Information Security; Amina Haq, David Wilson, Pauline Arcita; Prof. Meilin Liu; 03/27/2021; Project 3
 
+The Haq_Project3.cpp file can be used on bender.cs.wright.edu to decrypt a file through brute force search for the first four bytes of the key that are unknown.
+
+First compile the Haq_Project3.cpp file using the following command:
+  cryptog++ Haq_Project3.cpp -lcryptopp -o bruteforce
+
+Use the compiled file to decrypt using the following command
+  cryptoexec ./bruteforce <inputfile> <outputfile>
+where: 
+   <inputfile> represents the file containing the ciphertext to be decrypted using brute force
+   <outputfile> represents the file to which the plaintext produced will be written
+  
+Example code to decrypt file 00_e and write plaintext produced to 00_r
+  cryptoexec ./bruteforce 00_e 00_r
