@@ -66,7 +66,7 @@ int main()
 	string plaintext = "Hello";
 	string ciphertext = "";
 	string recoveredtext = "";
-	byte givenkey[AES::DEFAULT_KEYLENGTH + 1] = "aaaax7qfkp3mbv9w";
+	byte givenkey[AES::DEFAULT_KEYLENGTH + 1] = "aaaax7qfkp3mbv9w"; //try it with "000ax7qfkp3mbv9w" and it takes a split second, anything relatively larger takes near infinite time 
 	byte guessedkey[AES::DEFAULT_KEYLENGTH + 1] = "0000x7qfkp3mbv9w";
 	string guessKeypref = "wxyz";
 	string guessKeysuff = "x7qfkp3mbv9w";
