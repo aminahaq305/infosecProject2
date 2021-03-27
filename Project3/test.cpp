@@ -1,9 +1,13 @@
+//CEG4750-01; Information Security; Amina Haq, David Wilson, Pauline Arcita; Prof. Meilin Liu; 03/18/2021; Project 3
+
+//cpp libraries included
 #include<iostream>
 #include<fstream>
 #include<sstream>
 #include<string>
 using namespace std;
 
+//header files for cryptopp library included
 #include"cryptopp/cryptlib.h"
 #include"cryptopp/hex.h"
 #include"cryptopp/filters.h"
@@ -67,15 +71,13 @@ bool percentageCalc(string plain) {
 	return false;
 }
 
-int main()
+
+int main(int argc, char* argv[])
 {
 	//----------START OF VARIABLE DECLARATION-------------
-	string plaintext = "Hello"; //simple plaintext that I am using for testing purpose
-	string ciphertext = ""; //variable to hold the ciphertext produced after encrypting above plaintext
+	fstream file1; //file to read ciphertext from
+	fstream file2; //file to outputplaintext to
 	string recoveredtext = ""; //variable to hold the text recovered for each brute force iteration
-	byte givenkey[AES::DEFAULT_KEYLENGTH + 1] = "000ax7qfkp3mbv9w"; //the key I will use
-	////try it with "000ax7qfkp3mbv9w" and it takes a split second, anything relatively larger takes near infinite time
-
 	byte guessedkey[AES::DEFAULT_KEYLENGTH + 1] = "0000x7qfkp3mbv9w"; //the key that will be brute force searched
 	string guessKeypref = "wxyz"; //the first four characters of the key
 	string guessKeysuff = "x7qfkp3mbv9w"; //the part of the key that is given
@@ -83,9 +85,23 @@ int main()
 	string combinations = "0123456789abcdefghijklmnopqrstuvwxyz"; //all possible 36 combinations for the key characters
 	bool end = false; //this keeps track of whether the desired key is found or not
 
-	//---------DECRYPTING-------------
-	ciphertext = ciphertext + aes_encode(plaintext, givenkey); //
-	cout << ciphertext << endl;
+	//output usage if incorrect parameters provided
+	if (argc != 3)
+	{
+		cout << "usage:aes_decode infile outfile" << endl;
+		return 0;
+	}
+
+	//open files
+	file1.open(argv[1], ios::in);
+	file2.open(argv[2], ios::out);
+
+	//reading ciphertext and storing in string variable
+	stringstream buffer;
+	buffer << file1.rdbuf();
+	string ciphertext(buffer.str());
+	//close the file containing ciphertext
+	file1.close();
 
 	//------START OF BRUTEFORCE----------
 	for (int i = 0; i < 36 && !end; i++) { //this for loop works using the combinations string, so 0000.....zzzz
@@ -114,4 +130,9 @@ int main()
 			}
 		}
 	}
+	//write the recovered text to the file
+	file2 << recoveredtext;
+	cout << "Plaintext also stored in: " << argv[2] << endl;
+	file2.close();
+	return 0;
 }
